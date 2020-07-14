@@ -1,0 +1,174 @@
+<%- include("../partials/header") %>
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<p class="lead">
+				BarkPlace
+			</p>
+			<div>
+				<div class="list-group">
+				<li class="list-group-item active">info 1</li>
+				<li class="list-group-item">info 2</li>
+				<li class="list-group-item">info 3</li>
+					<br>
+			</div>
+			</div>
+			
+			
+			<a class="btn btn-sm btn-success" href="/dogs">Go Back</a>
+		    </div>
+		
+	         <div class="col-md-9"  >
+            <div class="thumbnail" >
+                <img class="img-responsive" src="<%= campgrounds.image %>">
+				<div class="card mb-3" >
+				
+                <div class="caption-full" >
+					<div style="padding:5px">
+                    <h4 class="float-right">$<%=campgrounds.price%></h4>
+					</div>
+                    <h4>
+						<div style="padding:5px">
+							 <a><%= campgrounds.name %></a>
+						</div>
+                    </h4>
+					<!-- <div> -->
+					<div style="padding:5px">
+                    <div class="float-right">
+                        <button type="button" class="btn btn-xs btn-primary" data-toggle="modal"
+                                data-target="#campgroundLikes">
+                            <span>Total likes: <i class="fas fa-thumbs-up"></i> <%= campgrounds.likes.length %></span>
+                        </button>
+                    </div>
+					</div>
+					<!-- </div> -->
+					<div style="padding:5px">
+                    <div style="padding-bottom:10px">
+                        <form action="/dogs/<%= campgrounds._id %>/like" method="POST">
+                            <div class="btn-group">
+                                <% if (currentUser && campgrounds.likes.some(function (like) {
+                                    return like.equals(currentUser._id)
+                                })) { %>
+                                <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-thumbs-up"></i> Liked (<%= campgrounds.likes.length %>)
+                                </button>
+                                <% } else { %>
+                                <button class="btn btn-sm btn-secondary">
+                                    <i class="fas fa-thumbs-up"></i> Like (<%= campgrounds.likes.length %>)
+                                </button>
+                                <% } %>
+                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal"
+                                        data-target="#campgroundLikes">See more details
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+					</div>
+				
+<!-- 				 
+				 <div class="clearfix">
+
+				 </div>
+				  -->
+				 <hr>
+					<div style="padding:10px">
+				 <p class="card-text"><%= campgrounds.description%></p>
+	  		    <p>
+          <em>Submitted by: <%= campgrounds.author.username %>, <%= moment(campgrounds.createdAt).fromNow() %></em>
+        </p>
+				
+             
+    	          <%	 if(currentUser && campgrounds.author.id.equals(currentUser._id)|| currentUser && currentUser.isAdmin) { %>
+					<button class="btn btn-sm btn-warning">
+				        <a id="Edit-Button" href="/dogs/<%=campgrounds._id %>/edit" >Edit</a>
+					</button>
+					<form id="delete-form" action="/dogs/<%=campgrounds._id %>?_method=delete" method="POST">
+						<button  class="btn btn-sm btn-danger">
+							Delete
+						</button>
+					</form>
+					<% } %>
+  </div>
+</div>			
+				</div>			 </div>
+		
+			
+			<div class="card mb-3">
+				<div class="card-header">
+					<a  class="btn  btn-success float-right " href="/dogs/<%= campgrounds._id%>/comments/new">
+						Add New Comments
+					</a>
+				</div>
+				
+				<div class="card-body">
+					
+				
+				<% campgrounds.comments.forEach(function(comment){ %>
+				<div class="row card-body">
+					<div class="col-md-12">
+						<strong class="card-title"><%= comment.author.username %></strong>
+						<!-- <span class="float-right">Just Now</span> -->
+						 <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+						<p class="card-text">
+			                <%= comment.text %>
+			            </p>
+						<%	if(currentUser && comment.author.id.equals(currentUser._id)|| currentUser && currentUser.isAdmin) { %>
+						<a class="btn btn-sm btn-warning" href="/dogs/<%= campgrounds._id%>/comments/<%= comment._id%>/edit">Edit</a>
+						<form id="delete-comment" action="/dogs/<%= campgrounds._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+							<button class="btn btn-sm btn-danger">
+								DELETE
+							</button>
+							<%	} %>
+						</form>
+					</div>
+				</div>
+	<% });%>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="campgroundLikes" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+               
+				
+                <h4 class="modal-title">Total likes: <%= campgrounds.likes.length %></h4>
+				 <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Liked by:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% campgrounds.likes.forEach(function(like) { %>
+                        <tr>
+							<%=console.log(like.username);%>
+                            <td><span class="badge"><i class="fas fa-user"></i></span> <%= like.username %></td>
+                        </tr>
+                    <% }); %>
+                    <% if (campgrounds.likes.length === 0) { %>
+                        <tr>
+                            <td><em>No likes yet.</em></td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+		
+<%- include("../partials/footer") %>
