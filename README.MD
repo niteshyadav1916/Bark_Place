@@ -1,10 +1,10 @@
-#YelpCamp
+#BarkPlace
 
 ##Initial Setup
 
 •Add Landing Page
-•Add Campgrounds Page that lists all campgrounds
-Each Campground has:
+•Add dogs Page that lists all dogs
+Each dog has:
 
 •Name
 •Image
@@ -12,29 +12,29 @@ Each Campground has:
 
 •Create our header and footer partials
 •Add in Bootstrap
-##Creating New Campgrounds
+##Creating New dogs
 
-•Setup new campground POST route
+•Setup new dog POST route
 •Add in body-parser
 •Setup route to show form
 •Add basic unstyled form
-##Style the campgrounds page
+##Style the dogs page
 
 •Add a better header/title
-•Make campgrounds display in a grid
+•Make dogs display in a grid
 ##Style the Navbar and Form
 
 •Add a navbar to all templates
-•Style the new campground form
+•Style the new dog form
 ##Add Mongoose
 
 •Install and configure Mongoose
-•Setup campground model
-•Use campground model inside of our routes
+•Setup dog model
+•Use dog model inside of our routes
 ##Show Page
 
 •Review the RESTful routes we've seen so far
-•Add description to our campground model
+•Add description to our dog model
 •Show db.collection.drop()
 •Add a show route/template
 ##Refactor Mongoose Code
@@ -49,7 +49,7 @@ Each Campground has:
 ##Add the Comment model!
 
 •Make our errors go away!
-•Display comments on campground show page
+•Display comments on dog show page
 ##Comment New/Create
 
 •Discuss nested routes
@@ -91,36 +91,36 @@ Each Campground has:
 
 •Associate users and comments
 •Save author's name to a comment automatically
-##Users + Campgrounds
+##Users + dogs
 
-•Prevent an unauthenticated user from creating a campground
-•Save username+id to newly created campground
-•Editing Campgrounds
+•Prevent an unauthenticated user from creating a dog
+•Save username+id to newly created dog
+•Editing dogs
 •Add Method-Override
-•Add Edit Route for Campgrounds
+•Add Edit Route for dogs
 •Add Link to Edit Page
 •Add Update Route
-#Deleting Campgrounds
+#Deleting dogs
 
 •Add Destroy Route
 •Add Delete button
-#Authorization Part 1: Campgrounds
+#Authorization Part 1: dogs
 
-•User can only edit his/her campgrounds
-•User can only delete his/her campgrounds
+•User can only edit his/her dogs
+•User can only delete his/her dogs
 •Hide/Show edit and delete buttons
 #Editing Comments
 
 •Add Edit route for comments
 •Add Edit button
 •Add Update route
-•Campground Edit Route: Comment Edit Route:
+•dog Edit Route: Comment Edit Route:
 
 #Deleting Comments
 
 •Add Destroy route
 •Add Delete button
-•Campground Destroy Route: /campgrounds/:id Comment Destroy Route: /campgrounds/:id/comments/:comment_id
+•dog Destroy Route: /dogs/:id Comment Destroy Route: /dogs/:id/comments/:comment_id
 
 #Authorization Part 2: Comments
 
@@ -148,10 +148,10 @@ BOOTSTRAP NAV COLLPASE JS
 
 •change styling in show template - comment delete/update
 
-•UPDATE/DELETE CAMPGROUND# YelpCamp
+•UPDATE/DELETE dog# BarkPlace
 
 name url verb desc.
 
-INDEX /campgrounds NEW /campgrounds/new CREATE /campgrounds SHOW /campgrounds/:id
+INDEX /dogs NEW /dogs/new CREATE /dogs SHOW /dogs/:id
 
-NEW campgrounds/:id/comments/new GET CREATE campgrounds/:id/comments POST
+NEW dogs/:id/comments/new GET CREATE dogs/:id/comments POST
